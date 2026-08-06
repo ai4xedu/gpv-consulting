@@ -1,0 +1,64 @@
+/* ============================================================
+   GPV — Giovanni's Positive Vibes
+   Design tokens · Direction « La Trajectoire » · v1.0 · juillet 2026
+   Source unique de vérité : la charte (charte/index.html), le site
+   et tous les gabarits (print + réseaux sociaux) consomment ces variables.
+   ============================================================ */
+
+:root {
+  /* ---- Couleurs de marque (issues du logo) ------------------ */
+  --gpv-turquoise: #35C1D6;
+  --gpv-azur:      #1F8FC4;
+  --gpv-indigo:    #16466E;
+  --gpv-nuit:      #10314F;
+  --gpv-ciel:      #E9F6FA;
+  --gpv-perle:     #F4F6F8;
+  --gpv-blanc:     #FFFFFF;
+
+  /* ---- Rôles fonctionnels ------------------------------------ */
+  --gpv-texte:             var(--gpv-nuit);
+  --gpv-texte-secondaire:  #44607C;            /* AA sur blanc (6,5:1) */
+  --gpv-texte-inverse:     var(--gpv-blanc);
+  --gpv-fond:              var(--gpv-blanc);
+  --gpv-fond-doux:         var(--gpv-ciel);
+  --gpv-fond-neutre:       var(--gpv-perle);
+  --gpv-fond-sombre:       var(--gpv-nuit);
+  --gpv-action:            var(--gpv-indigo);  /* boutons/liens : blanc dessus = AA (9,8:1) */
+  --gpv-action-survol:     var(--gpv-azur);
+  --gpv-accent:            var(--gpv-turquoise); /* accent graphique — jamais pour du texte sur blanc */
+  --gpv-filet:             #D3E4EC;
+
+  /* ---- Dégradé signature (réservé aux moments clés) ---------- */
+  --gpv-degrade:      linear-gradient(120deg, #35C1D6 0%, #1F8FC4 45%, #16466E 100%);
+  --gpv-degrade-doux: linear-gradient(120deg, rgba(53,193,214,.14), rgba(31,143,196,.10), rgba(22,70,110,.16));
+
+  /* ---- Typographies (2 familles maximum) --------------------- */
+  --gpv-font-titres: 'Poppins', 'Segoe UI', 'Helvetica Neue', sans-serif;
+  --gpv-font-texte:  'Inter', 'Helvetica Neue', Arial, sans-serif;
+
+  --gpv-taille-h1:      clamp(2.125rem, 4vw, 2.75rem);  /* 34–44 px · Poppins 600 · lh 1.18 */
+  --gpv-taille-h2:      clamp(1.625rem, 3vw, 2rem);     /* 26–32 px · Poppins 600 · lh 1.25 */
+  --gpv-taille-h3:      1.5rem;                         /* 24 px · Poppins 500 · lh 1.33 */
+  --gpv-taille-h4:      1.125rem;                       /* 18 px · Poppins 500 · lh 1.45 */
+  --gpv-taille-texte:   1rem;                           /* 16 px · Inter 400 · lh 1.65 */
+  --gpv-taille-petit:   .875rem;                        /* 14 px · Inter 400 · lh 1.6 */
+  --gpv-taille-legende: .75rem;                         /* 12 px · Inter 500 · maj + espacé */
+  --gpv-espacement-legende: .12em;
+
+  /* ---- Espacements (base 4 px) ------------------------------- */
+  --gpv-e-1:  .25rem;
+  --gpv-e-2:  .5rem;
+  --gpv-e-3:  .75rem;
+  --gpv-e-4:  1rem;
+  --gpv-e-6:  1.5rem;
+  --gpv-e-8:  2rem;
+  --gpv-e-12: 3rem;
+  --gpv-e-16: 4rem;
+
+  /* ---- Rayons et ombres --------------------------------------- */
+  --gpv-rayon:        12px;
+  --gpv-rayon-grand:  20px;
+  --gpv-rayon-pilule: 999px;
+  --gpv-ombre-carte:  0 2px 10px rgba(16, 49, 79, .06);
+  --gpv-ombre-douce:  0 6px 24px rgba(16, 49, 79, .08);
+}

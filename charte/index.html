@@ -1,0 +1,626 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GPV — Charte graphique · La Trajectoire · v1.0</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="tokens.css">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--gpv-font-texte);
+    font-size: var(--gpv-taille-texte);
+    line-height: 1.65;
+    color: var(--gpv-texte);
+    background: var(--gpv-fond);
+  }
+  h1, h2, h3, h4 { font-family: var(--gpv-font-titres); font-weight: 600; line-height: 1.25; }
+  h3, h4 { font-weight: 500; }
+  p { max-width: 68ch; }
+  .conteneur { max-width: 1080px; margin: 0 auto; padding: 0 var(--gpv-e-6); }
+
+  /* ---------- entête ---------- */
+  .entete {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(255,255,255,.94); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--gpv-filet);
+  }
+  .entete-int { display: flex; align-items: center; gap: var(--gpv-e-4); padding: var(--gpv-e-3) var(--gpv-e-6); max-width: 1080px; margin: 0 auto; flex-wrap: wrap; }
+  .entete img { height: 38px; width: auto; }
+  .entete-titre { font-family: var(--gpv-font-titres); font-weight: 600; font-size: 1rem; }
+  .entete-titre small { display: block; font-family: var(--gpv-font-texte); font-weight: 400; font-size: .75rem; color: var(--gpv-texte-secondaire); }
+  .pilule { margin-left: auto; background: var(--gpv-ciel); color: var(--gpv-indigo); font-size: .75rem; font-weight: 500; padding: .2rem .75rem; border-radius: var(--gpv-rayon-pilule); }
+  .sommaire { display: flex; gap: var(--gpv-e-2); overflow-x: auto; padding: 0 var(--gpv-e-6) var(--gpv-e-3); max-width: 1080px; margin: 0 auto; }
+  .sommaire a { flex: none; font-size: .8rem; color: var(--gpv-indigo); text-decoration: none; background: var(--gpv-perle); padding: .25rem .7rem; border-radius: var(--gpv-rayon-pilule); }
+  .sommaire a:hover { background: var(--gpv-ciel); }
+
+  /* ---------- couverture ---------- */
+  .couverture { background: var(--gpv-degrade); color: var(--gpv-blanc); padding: var(--gpv-e-16) 0; position: relative; overflow: hidden; }
+  .couverture h1 { font-size: var(--gpv-taille-h1); max-width: 22ch; }
+  .couverture .legende { color: rgba(255,255,255,.85); }
+  .couverture p.signature { font-family: var(--gpv-font-titres); font-weight: 500; font-size: 1.15rem; margin-top: var(--gpv-e-6); max-width: 44ch; }
+  .logo-couverture { display: block; width: 240px; height: auto; margin-bottom: var(--gpv-e-6); }
+
+  /* ---------- sections ---------- */
+  section { padding: var(--gpv-e-16) 0; border-bottom: 1px solid var(--gpv-filet); }
+  .sec-num { font-family: var(--gpv-font-titres); font-weight: 600; font-size: .9rem; color: var(--gpv-azur); letter-spacing: .1em; margin-bottom: var(--gpv-e-2); }
+  section h2 { font-size: var(--gpv-taille-h2); margin-bottom: var(--gpv-e-2); }
+  .intro-section { color: var(--gpv-texte-secondaire); margin-bottom: var(--gpv-e-8); }
+  .legende { font-size: var(--gpv-taille-legende); font-weight: 500; letter-spacing: var(--gpv-espacement-legende); text-transform: uppercase; color: var(--gpv-texte-secondaire); }
+  .grille { display: grid; gap: var(--gpv-e-4); }
+  .g2 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+  .g3 { grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); }
+  .g4 { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
+  .carte { background: var(--gpv-blanc); border: 1px solid var(--gpv-filet); border-radius: var(--gpv-rayon); padding: var(--gpv-e-6); }
+  .carte h4 { margin-bottom: var(--gpv-e-2); }
+  table { border-collapse: collapse; width: 100%; font-size: var(--gpv-taille-petit); }
+  th { text-align: left; font-family: var(--gpv-font-titres); font-weight: 500; padding: .6rem .75rem; background: var(--gpv-perle); }
+  td { padding: .6rem .75rem; border-bottom: 1px solid var(--gpv-filet); vertical-align: top; }
+  .ok { color: #0F6E56; font-weight: 500; }
+  .non { color: #993C1D; font-weight: 500; }
+  .note { background: var(--gpv-ciel); border-left: 3px solid var(--gpv-azur); border-radius: 0 var(--gpv-rayon) var(--gpv-rayon) 0; padding: var(--gpv-e-4) var(--gpv-e-6); font-size: var(--gpv-taille-petit); margin: var(--gpv-e-6) 0; }
+
+  /* ---------- logo ---------- */
+  .demo-logo { display: flex; align-items: center; justify-content: center; border-radius: var(--gpv-rayon); min-height: 230px; padding: var(--gpv-e-6); }
+  .demo-logo img { width: 200px; height: auto; }
+  .fond-blanc  { background: var(--gpv-blanc); border: 1px solid var(--gpv-filet); }
+  .fond-perle  { background: var(--gpv-perle); }
+  .fond-nuit   { background: var(--gpv-nuit); }
+  .fond-degrade{ background: var(--gpv-degrade); }
+  .zone-protection { position: relative; display: inline-block; border: 2px dashed var(--gpv-azur); padding: 45px; border-radius: 8px; background: var(--gpv-blanc); }
+  .zone-protection img { display: block; width: 180px; }
+  .zone-protection .repere { position: absolute; font-size: .7rem; color: var(--gpv-azur); font-weight: 500; }
+
+  /* ---------- couleurs ---------- */
+  .nuancier { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: var(--gpv-e-4); }
+  .nuance { border: 1px solid var(--gpv-filet); border-radius: var(--gpv-rayon); overflow: hidden; background: var(--gpv-blanc); }
+  .nuance-bloc { height: 110px; }
+  .nuance-infos { padding: var(--gpv-e-3) var(--gpv-e-4); font-size: .8rem; }
+  .nuance-infos strong { font-family: var(--gpv-font-titres); font-weight: 500; display: block; font-size: .9rem; }
+  .nuance-infos span { color: var(--gpv-texte-secondaire); display: block; }
+  .barre-ratio { display: flex; height: 44px; border-radius: var(--gpv-rayon-pilule); overflow: hidden; border: 1px solid var(--gpv-filet); margin: var(--gpv-e-4) 0; }
+
+  /* ---------- typographies ---------- */
+  .specimen { border-bottom: 1px solid var(--gpv-filet); padding: var(--gpv-e-6) 0; display: grid; grid-template-columns: minmax(0,1fr) 220px; gap: var(--gpv-e-6); align-items: baseline; }
+  .specimen .spec { font-size: .75rem; color: var(--gpv-texte-secondaire); text-align: right; }
+  @media (max-width: 700px){ .specimen { grid-template-columns: 1fr; } .specimen .spec { text-align: left; } }
+
+  /* ---------- motifs ---------- */
+  .tuile-motif { background: var(--gpv-perle); border-radius: var(--gpv-rayon); padding: var(--gpv-e-6); display: flex; flex-direction: column; gap: var(--gpv-e-3); align-items: center; justify-content: center; min-height: 170px; }
+  .pictos { display: flex; gap: var(--gpv-e-8); flex-wrap: wrap; align-items: flex-end; }
+  .picto { text-align: center; font-size: .8rem; color: var(--gpv-texte-secondaire); }
+  .picto svg { display: block; margin: 0 auto var(--gpv-e-2); }
+
+  /* ---------- températures + mockups ---------- */
+  .maquette { border: 1px solid var(--gpv-filet); border-radius: var(--gpv-rayon); overflow: hidden; background: var(--gpv-blanc); }
+  .maquette-titre { font-size: .75rem; color: var(--gpv-texte-secondaire); padding: var(--gpv-e-2) var(--gpv-e-4); border-top: 1px solid var(--gpv-filet); background: var(--gpv-perle); }
+  .bouton { display: inline-block; font-family: var(--gpv-font-titres); font-weight: 500; font-size: .85rem; background: var(--gpv-action); color: var(--gpv-blanc); padding: .55rem 1.2rem; border-radius: var(--gpv-rayon-pilule); text-decoration: none; }
+  .bouton-clair { background: var(--gpv-blanc); color: var(--gpv-indigo); }
+
+  .rs-format { position: relative; border-radius: 14px; overflow: hidden; flex: none; }
+  .zone-sure { position: absolute; background: rgba(53,193,214,.22); border: 1px dashed rgba(255,255,255,.7); display: flex; align-items: center; justify-content: center; font-size: .6rem; color: #fff; text-align: center; line-height: 1.3; }
+
+  footer { padding: var(--gpv-e-12) 0 var(--gpv-e-16); font-size: var(--gpv-taille-petit); color: var(--gpv-texte-secondaire); }
+
+  @media print {
+    .entete, .sommaire { display: none; }
+    section { page-break-inside: avoid; border: none; padding: 2rem 0; }
+    .couverture { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    body { font-size: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="entete">
+  <div class="entete-int">
+    <img src="assets/logo-gpv.svg" alt="Logo Giovanni's Positive Vibes">
+    <div class="entete-titre">Giovanni's Positive Vibes<small>Charte graphique · direction « La Trajectoire »</small></div>
+    <span class="pilule">v1.0 · juillet 2026</span>
+  </div>
+  <nav class="sommaire">
+    <a href="#fondations">01 Fondations</a>
+    <a href="#logo">02 Logo</a>
+    <a href="#couleurs">03 Couleurs</a>
+    <a href="#typographies">04 Typographies</a>
+    <a href="#motifs">05 Éléments graphiques</a>
+    <a href="#photographie">06 Photographie</a>
+    <a href="#temperatures">07 Deux températures</a>
+    <a href="#reseaux-sociaux">08 Réseaux sociaux</a>
+    <a href="#online">09 Web &amp; e-mail</a>
+    <a href="#offline">10 Print</a>
+  </nav>
+</header>
+
+<div class="couverture">
+  <div class="conteneur">
+    <img class="logo-couverture" src="assets/logo-gpv-blanc.svg" alt="Logo Giovanni's Positive Vibes">
+    <p class="legende">Charte graphique · v1.0 · juillet 2026</p>
+    <h1>La Trajectoire — l'identité visuelle de Giovanni's Positive Vibes</h1>
+    <p class="signature">« Comprendre ce qui bloque. Renforcer ce qui relie. Mettre en mouvement ce qui doit changer. »</p>
+  </div>
+</div>
+
+<!-- ============ 01 FONDATIONS ============ -->
+<section id="fondations">
+  <div class="conteneur">
+    <div class="sec-num">01</div>
+    <h2>Fondations</h2>
+    <p class="intro-section">Ce que la marque dit, à qui, et sur quel ton. Tout support — post Instagram ou proposition commerciale — doit pouvoir se relire à travers cette page.</p>
+
+    <div class="grille g2">
+      <div class="carte">
+        <h4>Positionnement</h4>
+        <p>Giovanni's Positive Vibes est une structure d'accompagnement des <strong>transformations humaines, relationnelles et managériales</strong>. Elle aide les personnes, les équipes et les organisations à transformer les blocages en décisions plus claires, en coopérations plus solides et en changements durables.</p>
+      </div>
+      <div class="carte">
+        <h4>Le concept « Trajectoire »</h4>
+        <p>La transformation est un déplacement : un point de départ, une prise de conscience, une mise en mouvement. Le dégradé de la vague du logo (turquoise → indigo) matérialise cette trajectoire et sert de fil conducteur à toute l'identité.</p>
+      </div>
+    </div>
+
+    <h3 style="margin: var(--gpv-e-8) 0 var(--gpv-e-4);">Les quatre pôles</h3>
+    <div class="grille g4">
+      <div class="carte"><h4>GPV Organisations</h4><p style="font-size:.875rem;">Leadership humain, communication, coopération, changement. Dirigeants, DRH, managers, équipes.</p></div>
+      <div class="carte"><h4>GPV Accompagnements</h4><p style="font-size:.875rem;">Transitions personnelles, blocages émotionnels, décisions, dynamiques relationnelles.</p></div>
+      <div class="carte"><h4>GPV Expériences</h4><p style="font-size:.875rem;">Journées thématiques, retraites, immersions, parapente expérientiel encadré.</p></div>
+      <div class="carte"><h4>GPV Insights</h4><p style="font-size:.875rem;">Conférences, podcasts, vidéos, articles, livre, collaborations éditoriales.</p></div>
+    </div>
+
+    <h3 style="margin: var(--gpv-e-8) 0 var(--gpv-e-4);">Baselines officielles</h3>
+    <table>
+      <tr><th>Orientation</th><th>Baseline</th><th>Usage</th></tr>
+      <tr><td>Institutionnelle</td><td>Transformer les dynamiques humaines. Renforcer les organisations.</td><td>Company Profile B2B, site corporate, propositions</td></tr>
+      <tr><td>Émotionnelle</td><td>Comprendre ce qui bloque. Retrouver ce qui met en mouvement.</td><td>Accompagnements, ateliers, contenus grand public</td></tr>
+      <tr><td>Orientée résultats</td><td>Des décisions plus claires. Des relations plus justes. Des équipes plus solides.</td><td>Présentation commerciale, conférence, page offre</td></tr>
+      <tr><td>Signature générale</td><td>Comprendre ce qui bloque. Renforcer ce qui relie. Mettre en mouvement ce qui doit changer.</td><td>Couverture, manifeste de marque</td></tr>
+    </table>
+
+    <h3 style="margin: var(--gpv-e-8) 0 var(--gpv-e-4);">Ton rédactionnel</h3>
+    <div class="grille g2">
+      <div class="carte">
+        <h4 class="ok">À faire</h4>
+        <ul style="padding-left:1.2rem; font-size:.875rem;">
+          <li>Professionnel, humain, élégant, précis, accessible</li>
+          <li>Phrases courtes, verbes d'action, exemples concrets</li>
+          <li>« Vous » en institutionnel ; tutoiement possible en grand public</li>
+          <li>Inspirant sans mysticisme, commercial sans agressivité</li>
+        </ul>
+      </div>
+      <div class="carte">
+        <h4 class="non">À éviter</h4>
+        <ul style="padding-left:1.2rem; font-size:.875rem;">
+          <li>Superlatifs, jargon de développement personnel</li>
+          <li>Promesses de transformation spectaculaire ou de guérison</li>
+          <li>Concepts scientifiques utilisés comme décoration (« neuro-quantique »)</li>
+          <li>Chiffres, témoignages ou références non vérifiés</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 02 LOGO ============ -->
+<section id="logo">
+  <div class="conteneur">
+    <div class="sec-num">02</div>
+    <h2>Logo</h2>
+    <p class="intro-section">Le logo est vectorisé, transparent, et <strong>s'adapte au fond</strong> : couleur sur fonds clairs, logotype blanc sur fonds sombres, monochrome pour les usages techniques. Fichiers officiels uniquement — jamais de redessin ni d'autre recolorisation.</p>
+
+    <div class="note"><strong>Fichiers officiels :</strong> <code>assets/logo-gpv.svg</code> (couleur, fond transparent — défaut sur fonds clairs) · <code>assets/logo-gpv-blanc.svg</code> (logotype blanc, icône couleur — fonds sombres et dégradé) · <code>assets/logo-gpv-mono-nuit.svg</code> (monochrome bleu nuit — filigrane, tampon, gravure, impression une couleur) · <code>assets/logo-gpv-transparent.png</code> (PNG transparent 1590 × 920, outils sans SVG) · <code>assets/logo-gpv.jpeg</code> (original, référence de fidélité).</p>
+
+    <div class="grille g3">
+      <div>
+        <div class="demo-logo fond-blanc"><img src="assets/logo-gpv.svg" alt="Logo sur fond blanc"></div>
+        <p class="maquette-titre">Usage privilégié — fond blanc</p>
+      </div>
+      <div>
+        <div class="demo-logo fond-perle"><img src="assets/logo-gpv.svg" alt="Logo sur fond perle"></div>
+        <p class="maquette-titre">Fonds clairs (perle, ciel) — usage direct, fond transparent</p>
+      </div>
+      <div>
+        <div class="demo-logo fond-degrade"><img src="assets/logo-gpv-blanc.svg" alt="Version logotype blanc sur dégradé"></div>
+        <p class="maquette-titre">Dégradé signature — version logotype blanc</p>
+      </div>
+      <div>
+        <div class="demo-logo fond-nuit"><img src="assets/logo-gpv-blanc.svg" alt="Version logotype blanc sur bleu nuit"></div>
+        <p class="maquette-titre">Fonds sombres — version logotype blanc</p>
+      </div>
+      <div>
+        <div class="demo-logo fond-blanc"><img src="assets/logo-gpv-mono-nuit.svg" alt="Version monochrome bleu nuit"></div>
+        <p class="maquette-titre">Monochrome bleu nuit — filigrane, tampon, une couleur</p>
+      </div>
+    </div>
+
+    <div class="grille g2" style="margin-top: var(--gpv-e-8); align-items:start;">
+      <div>
+        <h3 style="margin-bottom: var(--gpv-e-4);">Zone de protection</h3>
+        <div class="zone-protection">
+          <img src="assets/logo-gpv.svg" width="220" alt="Zone de protection du logo">
+          <span class="repere" style="top:12px; left:50%; transform:translateX(-50%);">¼ de la largeur du cercle</span>
+          <span class="repere" style="left:6px; top:50%; transform:rotate(-90deg) translateX(50%); transform-origin:left;">¼</span>
+        </div>
+        <p style="font-size:.875rem; margin-top: var(--gpv-e-4);">Aucun texte ni élément graphique ne pénètre la zone. Elle vaut aussi pour les bords de page et de cadre.</p>
+      </div>
+      <div>
+        <h3 style="margin-bottom: var(--gpv-e-4);">Tailles minimales et interdits</h3>
+        <table>
+          <tr><th>Contexte</th><th>Taille minimale</th></tr>
+          <tr><td>Écran — logo complet</td><td>140 px de largeur (lisibilité de « Positive Vibes »)</td></tr>
+          <tr><td>Écran — avatar / favicon (cercle seul, extrait du SVG)</td><td>32 px</td></tr>
+          <tr><td>Print — logo complet</td><td>28 mm de largeur</td></tr>
+        </table>
+        <ul style="padding-left:1.2rem; font-size:.875rem; margin-top: var(--gpv-e-4);">
+          <li class="non">Ne pas déformer, incliner ni recadrer le logotype</li>
+          <li class="non">Ne pas changer les couleurs ni appliquer d'ombre ou de contour</li>
+          <li class="non">Sur fond sombre ou dégradé : version logotype blanc — jamais la version couleur dont le texte disparaîtrait</li>
+          <li class="non">Ne pas redessiner le logo ni créer d'autres recolorisations que les trois déclinaisons officielles</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 03 COULEURS ============ -->
+<section id="couleurs">
+  <div class="conteneur">
+    <div class="sec-num">03</div>
+    <h2>Couleurs</h2>
+    <p class="intro-section">Sept couleurs issues du logo, une règle de répartition 60 / 30 / 10, et un dégradé signature réservé aux moments clés.</p>
+
+    <div class="nuancier">
+      <div class="nuance"><div class="nuance-bloc" style="background:#35C1D6;"></div><div class="nuance-infos"><strong>Turquoise</strong><span>#35C1D6 · R53 V193 B214</span><span>C75 M10 J0 N16</span><span>Accent graphique uniquement</span></div></div>
+      <div class="nuance"><div class="nuance-bloc" style="background:#1F8FC4;"></div><div class="nuance-infos"><strong>Azur</strong><span>#1F8FC4 · R31 V143 B196</span><span>C84 M27 J0 N23</span><span>Survols, filets, grands titres inversés</span></div></div>
+      <div class="nuance"><div class="nuance-bloc" style="background:#16466E;"></div><div class="nuance-infos"><strong>Indigo</strong><span>#16466E · R22 V70 B110</span><span>C80 M36 J0 N57</span><span>Boutons, liens, texte inversé AA</span></div></div>
+      <div class="nuance"><div class="nuance-bloc" style="background:#10314F;"></div><div class="nuance-infos"><strong>Bleu nuit</strong><span>#10314F · R16 V49 B79</span><span>C80 M38 J0 N69</span><span>Texte courant, fonds sombres</span></div></div>
+      <div class="nuance"><div class="nuance-bloc" style="background:#E9F6FA; border-bottom:1px solid var(--gpv-filet);"></div><div class="nuance-infos"><strong>Bleu ciel</strong><span>#E9F6FA · R233 V246 B250</span><span>C7 M2 J0 N2</span><span>Fonds doux, cartes, encarts</span></div></div>
+      <div class="nuance"><div class="nuance-bloc" style="background:#F4F6F8; border-bottom:1px solid var(--gpv-filet);"></div><div class="nuance-infos"><strong>Gris perle</strong><span>#F4F6F8 · R244 V246 B248</span><span>C2 M1 J0 N3</span><span>Fonds neutres, zones techniques</span></div></div>
+      <div class="nuance"><div class="nuance-bloc" style="background:var(--gpv-degrade);"></div><div class="nuance-infos"><strong>Dégradé signature</strong><span>120° · turquoise → azur → indigo</span><span>Héros, couvertures, moments clés uniquement — jamais en fond de texte long</span></div></div>
+    </div>
+
+    <h3 style="margin: var(--gpv-e-8) 0 var(--gpv-e-2);">Répartition 60 / 30 / 10</h3>
+    <div class="barre-ratio">
+      <div style="flex:60; background:#FFFFFF; display:flex; align-items:center; justify-content:center; font-size:.75rem; color:#44607C;">60 % fonds clairs</div>
+      <div style="flex:30; background:#10314F; display:flex; align-items:center; justify-content:center; font-size:.75rem; color:#fff;">30 % nuit / indigo</div>
+      <div style="flex:10; background:var(--gpv-degrade); display:flex; align-items:center; justify-content:center; font-size:.7rem; color:#fff;">10 %</div>
+    </div>
+    <p style="font-size:.875rem;">La température varie selon le public : côté Organisations (B2B), le dégradé se fait discret (filets, soulignés) ; côté Expériences et grand public, il peut occuper des surfaces entières.</p>
+
+    <h3 style="margin: var(--gpv-e-8) 0 var(--gpv-e-4);">Contrastes vérifiés (WCAG)</h3>
+    <table>
+      <tr><th>Combinaison</th><th>Ratio</th><th>Verdict</th></tr>
+      <tr><td style="background:#fff;"><span style="color:#10314F;">Bleu nuit sur blanc</span></td><td>13,3 : 1</td><td class="ok">AAA — tout usage</td></tr>
+      <tr><td style="background:#E9F6FA;"><span style="color:#10314F;">Bleu nuit sur bleu ciel</span></td><td>12,1 : 1</td><td class="ok">AAA — tout usage</td></tr>
+      <tr><td style="background:#16466E;"><span style="color:#fff;">Blanc sur indigo</span></td><td>9,8 : 1</td><td class="ok">AAA — boutons, texte inversé</td></tr>
+      <tr><td style="background:#fff;"><span style="color:#44607C;">Texte secondaire sur blanc</span></td><td>6,5 : 1</td><td class="ok">AA — texte courant</td></tr>
+      <tr><td style="background:#35C1D6;"><span style="color:#10314F;">Bleu nuit sur turquoise</span></td><td>6,2 : 1</td><td class="ok">AA — badges, encarts</td></tr>
+      <tr><td style="background:#1F8FC4;"><span style="color:#fff;">Blanc sur azur</span></td><td>3,6 : 1</td><td class="non">Grands titres (≥ 24 px) uniquement</td></tr>
+      <tr><td style="background:#fff;"><span style="color:#35C1D6;">Turquoise sur blanc</span></td><td>2,2 : 1</td><td class="non">Jamais pour du texte</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ============ 04 TYPOGRAPHIES ============ -->
+<section id="typographies">
+  <div class="conteneur">
+    <div class="sec-num">04</div>
+    <h2>Typographies</h2>
+    <p class="intro-section">Deux familles maximum : Poppins pour la voix des titres, Inter pour le confort de lecture. Toutes deux sur Google Fonts — identiques sur le web, les réseaux sociaux et le print.</p>
+
+    <div class="specimen"><div style="font-family:var(--gpv-font-titres); font-weight:600; font-size:var(--gpv-taille-h1); line-height:1.18;">Comprendre ce qui bloque.</div><div class="spec">H1 · Poppins SemiBold · 34–44 px · interligne 1,18</div></div>
+    <div class="specimen"><div style="font-family:var(--gpv-font-titres); font-weight:600; font-size:var(--gpv-taille-h2);">Renforcer ce qui relie.</div><div class="spec">H2 · Poppins SemiBold · 26–32 px · interligne 1,25</div></div>
+    <div class="specimen"><div style="font-family:var(--gpv-font-titres); font-weight:500; font-size:var(--gpv-taille-h3);">Mettre en mouvement ce qui doit changer.</div><div class="spec">H3 · Poppins Medium · 24 px · interligne 1,33</div></div>
+    <div class="specimen"><p>Les difficultés d'un projet, d'une équipe ou d'une relation ne sont jamais uniquement techniques : elles tiennent aussi aux rôles, aux interprétations, aux non-dits et à la qualité des décisions. GPV relie la structure du pilotage de projet à la finesse du travail humain.</p><div class="spec">Texte courant · Inter Regular · 16 px · interligne 1,65</div></div>
+    <div class="specimen"><p style="font-size:var(--gpv-taille-petit); color:var(--gpv-texte-secondaire);">Casablanca, Maroc · accompagnements à distance · giovannispositivevibes@gmail.com</p><div class="spec">Petit texte · Inter Regular · 14 px</div></div>
+    <div class="specimen"><p class="legende">Transformations humaines, relationnelles et managériales</p><div class="spec">Légende · Inter Medium · 12 px · majuscules · espacement 0,12 em</div></div>
+
+    <div class="note">Poppins ne descend jamais sous 500 ; Inter sous 400. Pas d'italique décoratif, pas de texte en dégradé, pas plus de deux graisses par support. Les chiffres clés se composent en Poppins SemiBold, dans une seule couleur.</div>
+  </div>
+</section>
+
+<!-- ============ 05 ÉLÉMENTS GRAPHIQUES ============ -->
+<section id="motifs">
+  <div class="conteneur">
+    <div class="sec-num">05</div>
+    <h2>Éléments graphiques</h2>
+    <p class="intro-section">Quatre motifs déclinables partout. Ils évoquent la vague du logo sans jamais le copier ni le remplacer.</p>
+
+    <div class="grille g2">
+      <div class="tuile-motif">
+        <svg width="100%" height="70" viewBox="0 0 400 70" preserveAspectRatio="none" role="img" aria-label="Vague séparatrice">
+          <defs><linearGradient id="gv" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#35C1D6"/><stop offset=".5" stop-color="#1F8FC4"/><stop offset="1" stop-color="#16466E"/></linearGradient></defs>
+          <path d="M0 45 C 70 15, 130 65, 200 40 C 270 15, 330 55, 400 30 L400 70 L0 70 Z" fill="url(#gv)" opacity=".9"/>
+        </svg>
+        <span class="legende">Vague séparatrice — transitions de sections</span>
+      </div>
+      <div class="tuile-motif">
+        <svg width="320" height="70" viewBox="0 0 320 70" role="img" aria-label="Trajectoire pointillée">
+          <path d="M15 55 C 90 55, 110 20, 175 24 C 240 28, 260 45, 298 18" fill="none" stroke="#1F8FC4" stroke-width="2" stroke-dasharray="1 8" stroke-linecap="round"/>
+          <circle cx="15" cy="55" r="5" fill="#16466E"/>
+          <circle cx="175" cy="24" r="4" fill="#1F8FC4"/>
+          <path d="M298 18 l-9 -1 m9 1 l-4 8" stroke="#35C1D6" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+        </svg>
+        <span class="legende">Trajectoire — départ, étape, mise en mouvement</span>
+      </div>
+      <div class="tuile-motif">
+        <svg width="200" height="90" viewBox="0 0 200 90" role="img" aria-label="Cercles incomplets">
+          <circle cx="45" cy="45" r="34" fill="none" stroke="#16466E" stroke-width="2.5" stroke-dasharray="165 60" stroke-linecap="round" transform="rotate(-60 45 45)"/>
+          <circle cx="120" cy="52" r="22" fill="none" stroke="#1F8FC4" stroke-width="2.5" stroke-dasharray="98 42" stroke-linecap="round" transform="rotate(80 120 52)"/>
+          <circle cx="168" cy="38" r="12" fill="none" stroke="#35C1D6" stroke-width="2.5" stroke-dasharray="52 24" stroke-linecap="round" transform="rotate(200 168 38)"/>
+        </svg>
+        <span class="legende">Cercles incomplets — le changement en cours</span>
+      </div>
+      <div class="tuile-motif">
+        <div class="pictos">
+          <div class="picto"><svg width="44" height="44" viewBox="0 0 44 44" fill="none" stroke="#16466E" stroke-width="2" stroke-linecap="round"><circle cx="22" cy="10" r="5"/><circle cx="10" cy="32" r="5"/><circle cx="34" cy="32" r="5"/><path d="M19 14 L12 27 M25 14 L32 27 M15 32 L29 32"/></svg>Organisations</div>
+          <div class="picto"><svg width="44" height="44" viewBox="0 0 44 44" fill="none" stroke="#16466E" stroke-width="2" stroke-linecap="round"><circle cx="17" cy="22" r="10"/><circle cx="28" cy="22" r="10"/></svg>Accompagnements</div>
+          <div class="picto"><svg width="44" height="44" viewBox="0 0 44 44" fill="none" stroke="#16466E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 36 L16 16 L23 27 L29 19 L40 36 Z"/><path d="M14 8 C 20 3, 30 3, 36 9" stroke="#1F8FC4" stroke-dasharray="1 5"/></svg>Expériences</div>
+          <div class="picto"><svg width="44" height="44" viewBox="0 0 44 44" fill="none" stroke="#16466E" stroke-width="2" stroke-linecap="round"><circle cx="16" cy="24" r="3" fill="#16466E" stroke="none"/><path d="M24 14 C 30 17, 30 31, 24 34 M30 8 C 40 13, 40 35, 30 40" stroke="#1F8FC4"/></svg>Insights</div>
+        </div>
+        <span class="legende">Pictogrammes filaires — les quatre pôles</span>
+      </div>
+    </div>
+    <div class="note">Trait de 2 à 2,5 px, extrémités arrondies, une à deux couleurs maximum par motif. Les motifs ne se superposent jamais au logo et restent en périphérie du contenu (bas de page, angles, transitions).</div>
+  </div>
+</section>
+
+<!-- ============ 06 PHOTOGRAPHIE ============ -->
+<section id="photographie">
+  <div class="conteneur">
+    <div class="sec-num">06</div>
+    <h2>Photographie</h2>
+    <p class="intro-section">Des personnes réelles dans des situations réelles. La photographie prouve l'authenticité de la démarche — elle ne la met pas en scène.</p>
+    <div class="grille g2">
+      <div class="carte">
+        <h4 class="ok">À faire</h4>
+        <ul style="padding-left:1.2rem; font-size:.875rem;">
+          <li>Portraits réels et professionnels de Yassine</li>
+          <li>Interactions en atelier, groupes au travail</li>
+          <li>Montagne et parapente réservés aux pages histoire et Expériences</li>
+          <li>Lumière naturelle, retouche discrète</li>
+          <li>Voile bleu nuit (opacité 40–60 %) quand du texte se superpose</li>
+        </ul>
+      </div>
+      <div class="carte">
+        <h4 class="non">À éviter</h4>
+        <ul style="padding-left:1.2rem; font-size:.875rem;">
+          <li>Banques d'images artificielles (« réunion qui rit devant un graphique »)</li>
+          <li>Lotus, cerveaux lumineux, silhouettes au coucher du soleil</li>
+          <li>Iconographie ésotérique ou médicale</li>
+          <li>Visages générés par IA ou traits retouchés</li>
+          <li>Photos de clients ou de séances identifiables</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 07 DEUX TEMPÉRATURES ============ -->
+<section id="temperatures">
+  <div class="conteneur">
+    <div class="sec-num">07</div>
+    <h2>Les deux températures</h2>
+    <p class="intro-section">Une seule charte, deux réglages. Le dégradé s'assourdit face aux organisations, il respire face au grand public.</p>
+    <div class="grille g2">
+      <div class="maquette">
+        <div style="padding: var(--gpv-e-8); border-top: 3px solid var(--gpv-turquoise);">
+          <p class="legende" style="color:var(--gpv-azur);">GPV Organisations</p>
+          <h3 style="margin: var(--gpv-e-2) 0;">Coopération et traitement des tensions</h3>
+          <p style="font-size:.875rem;">Transformer les désaccords en conversations utiles et en décisions de coopération. Atelier construit sur vos cas réels.</p>
+          <p style="margin-top: var(--gpv-e-4);"><a class="bouton" href="#">Demander un cadrage</a></p>
+        </div>
+        <p class="maquette-titre">Température B2B — fond blanc, un filet turquoise, un seul bouton indigo</p>
+      </div>
+      <div class="maquette">
+        <div style="background: var(--gpv-degrade); color: #fff; padding: var(--gpv-e-8);">
+          <p class="legende" style="color: rgba(255,255,255,.85);">GPV Expériences</p>
+          <h3 style="margin: var(--gpv-e-2) 0;">Re-Connectez-vous</h3>
+          <p style="font-size:.875rem; color: rgba(255,255,255,.92);">Une journée pour sortir du pilote automatique : observer, comprendre, expérimenter — et repartir avec un engagement concret.</p>
+          <p style="margin-top: var(--gpv-e-4);"><a class="bouton bouton-clair" href="#">Réserver ma place</a></p>
+        </div>
+        <p class="maquette-titre">Température B2C — dégradé signature en surface pleine, bouton clair</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 08 RÉSEAUX SOCIAUX ============ -->
+<section id="reseaux-sociaux">
+  <div class="conteneur">
+    <div class="sec-num">08</div>
+    <h2>Réseaux sociaux — Instagram, TikTok, YouTube</h2>
+    <p class="intro-section">Les formats de référence, leurs zones sûres et les règles de gabarit. Objectif : qu'un contenu GPV soit reconnaissable avant même d'être lu.</p>
+
+    <table>
+      <tr><th>Plateforme</th><th>Format</th><th>Dimensions</th><th>Zone sûre (texte et logo)</th></tr>
+      <tr><td>Instagram</td><td>Post portrait (défaut)</td><td>1080 × 1350</td><td>Garder l'essentiel dans le carré central 1080 × 1080 (recadrage grille)</td></tr>
+      <tr><td>Instagram</td><td>Carrousel</td><td>1080 × 1350</td><td>Marges internes 96 px ; amorce visuelle de la diapositive suivante</td></tr>
+      <tr><td>Instagram</td><td>Story / Reel</td><td>1080 × 1920</td><td>250 px en haut, 420 px en bas, 120 px à droite libres d'UI</td></tr>
+      <tr><td>TikTok</td><td>Vidéo</td><td>1080 × 1920</td><td>150 px en haut, 450 px en bas, 140 px à droite (icônes), 60 px à gauche</td></tr>
+      <tr><td>YouTube</td><td>Vignette</td><td>1280 × 720</td><td>Éviter l'angle inférieur droit (horodatage) ; lisible à 120 px de large</td></tr>
+      <tr><td>YouTube</td><td>Bannière chaîne</td><td>2560 × 1440</td><td>Zone visible sur tous écrans : 1546 × 423 centrée</td></tr>
+    </table>
+
+    <h3 style="margin: var(--gpv-e-8) 0 var(--gpv-e-4);">Zones sûres — gabarits verticaux</h3>
+    <div style="display:flex; gap: var(--gpv-e-6); flex-wrap: wrap; align-items: flex-start;">
+      <figure>
+        <div class="rs-format" style="width:150px; height:267px; background: var(--gpv-degrade);">
+          <div class="zone-sure" style="top:0; left:0; right:0; height:35px;">250 px — UI</div>
+          <div class="zone-sure" style="bottom:0; left:0; right:0; height:59px;">420 px — légende + actions</div>
+          <div class="zone-sure" style="top:35px; bottom:59px; right:0; width:17px;"></div>
+          <div style="position:absolute; top:44px; left:12px; right:26px; color:#fff; font-family:var(--gpv-font-titres); font-weight:600; font-size:.72rem; line-height:1.3;">Le hook en 2 lignes maximum, dans la zone sûre</div>
+          <div style="position:absolute; bottom:66px; left:12px; color:rgba(255,255,255,.9); font-size:.55rem;">@wearegiovanni</div>
+        </div>
+        <figcaption class="legende" style="margin-top:.5rem;">Reel / Story Instagram</figcaption>
+      </figure>
+      <figure>
+        <div class="rs-format" style="width:150px; height:267px; background:#10314F;">
+          <div class="zone-sure" style="top:0; left:0; right:0; height:21px;">150 px</div>
+          <div class="zone-sure" style="bottom:0; left:0; right:0; height:63px;">450 px — description + musique</div>
+          <div class="zone-sure" style="top:21px; bottom:63px; right:0; width:20px;">140</div>
+          <div style="position:absolute; top:32px; left:12px; right:28px; color:#fff; font-family:var(--gpv-font-titres); font-weight:600; font-size:.72rem; line-height:1.3;">Scène concrète d'abord, théorie ensuite</div>
+          <div style="position:absolute; bottom:70px; left:12px; right:28px;"><span style="background:#35C1D6; color:#10314F; font-size:.52rem; font-weight:600; padding:2px 8px; border-radius:999px;">GPV Insights</span></div>
+        </div>
+        <figcaption class="legende" style="margin-top:.5rem;">TikTok</figcaption>
+      </figure>
+      <figure>
+        <div class="rs-format" style="width:284px; height:160px; background: linear-gradient(120deg, #10314F 55%, #16466E);">
+          <div style="position:absolute; top:18px; left:16px; width:150px; color:#fff; font-family:var(--gpv-font-titres); font-weight:600; font-size:1.05rem; line-height:1.2;">3 à 4 mots<br>maximum</div>
+          <div style="position:absolute; left:16px; bottom:16px; width:44px; height:4px; background:#35C1D6; border-radius:2px;"></div>
+          <div style="position:absolute; right:12px; top:12px; bottom:12px; width:96px; background:rgba(233,246,250,.16); border:1px dashed rgba(255,255,255,.5); border-radius:8px; display:flex; align-items:center; justify-content:center; color:rgba(255,255,255,.8); font-size:.6rem; text-align:center;">portrait réel<br>plein cadre</div>
+        </div>
+        <figcaption class="legende" style="margin-top:.5rem;">Vignette YouTube 1280 × 720</figcaption>
+      </figure>
+    </div>
+
+    <h3 style="margin: var(--gpv-e-8) 0 var(--gpv-e-4);">Gabarit de post Instagram</h3>
+    <div style="display:flex; gap: var(--gpv-e-6); flex-wrap:wrap; align-items:flex-start;">
+      <figure>
+        <div class="rs-format" style="width:240px; height:300px; background: var(--gpv-ciel);">
+          <div style="position:absolute; top:0; left:0; right:0; height:6px; background:var(--gpv-degrade);"></div>
+          <div style="position:absolute; top:22px; left:20px;"><span style="background:#fff; border:1px solid #D3E4EC; color:#16466E; font-size:.55rem; font-weight:600; padding:3px 10px; border-radius:999px;">COMMUNICATION</span></div>
+          <div style="position:absolute; top:58px; left:20px; right:20px; color:#10314F; font-family:var(--gpv-font-titres); font-weight:600; font-size:1rem; line-height:1.3;">Un désaccord évité ne disparaît pas. Il attend.</div>
+          <div style="position:absolute; bottom:40px; left:20px; color:#44607C; font-size:.6rem;">@wearegiovanni</div>
+          <svg style="position:absolute; bottom:0; left:0;" width="240" height="26" viewBox="0 0 240 26" preserveAspectRatio="none"><path d="M0 16 C 45 4, 75 24, 120 14 C 165 4, 200 20, 240 10 L240 26 L0 26 Z" fill="#1F8FC4" opacity=".25"/></svg>
+        </div>
+        <figcaption class="legende" style="margin-top:.5rem;">Post 1080 × 1350 — filet dégradé, badge thème, une idée</figcaption>
+      </figure>
+      <div class="carte" style="flex:1; min-width:280px;">
+        <h4>Règles de gabarit RS</h4>
+        <ul style="padding-left:1.2rem; font-size:.875rem;">
+          <li>Hook concret et spécifique en premier — la scène avant la théorie</li>
+          <li>Une idée par visuel ; le filet dégradé (haut ou bas) signe chaque publication</li>
+          <li>Logo en cartouche blanc, coin supérieur gauche, uniquement quand nécessaire (couverture, vignette) — jamais sur chaque slide</li>
+          <li>Handle <strong>@wearegiovanni</strong> en bas dans la zone sûre</li>
+          <li>Texte : Poppins SemiBold ≥ 64 px (sur 1080 px de large) ; blanc sur nuit/dégradé ou nuit sur ciel</li>
+          <li>Maximum 5 hashtags Instagram ; pas de promesse spectaculaire</li>
+          <li>Badge de pôle (Organisations, Accompagnements, Expériences, Insights) pour classer les contenus</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 09 WEB & E-MAIL ============ -->
+<section id="online">
+  <div class="conteneur">
+    <div class="sec-num">09</div>
+    <h2>Web et e-mail</h2>
+    <p class="intro-section">Le bloc d'accueil du futur site, la bannière LinkedIn et la signature e-mail partagent les mêmes constantes : fond clair ou dégradé signature, un seul bouton, beaucoup d'air.</p>
+
+    <div class="maquette" style="margin-bottom: var(--gpv-e-6);">
+      <div style="background: var(--gpv-degrade); color:#fff; padding: var(--gpv-e-12) var(--gpv-e-8); position:relative; overflow:hidden;">
+        <svg style="position:absolute; right:-30px; top:20px; opacity:.35;" width="300" height="160" viewBox="0 0 300 160"><path d="M10 130 C 90 130, 120 40, 200 46 C 260 51, 275 90, 292 60" fill="none" stroke="#fff" stroke-width="2" stroke-dasharray="1 9" stroke-linecap="round"/><circle cx="10" cy="130" r="5" fill="#fff"/><path d="M292 60 l-10 -2 m10 2 l-5 9" stroke="#fff" stroke-width="2.5" fill="none" stroke-linecap="round"/></svg>
+        <p class="legende" style="color:rgba(255,255,255,.85);">Transformations humaines, relationnelles et managériales</p>
+        <h3 style="font-size:1.7rem; max-width:20ch; margin: var(--gpv-e-3) 0;">Comprendre ce qui bloque. Renforcer ce qui relie. Mettre en mouvement ce qui doit changer.</h3>
+        <p style="font-size:.9rem; color:rgba(255,255,255,.9); max-width:52ch;">Formations, accompagnements, conférences et expériences immersives — à Casablanca et à distance.</p>
+        <p style="margin-top: var(--gpv-e-6);"><a class="bouton bouton-clair" href="#">Prendre contact</a>&nbsp;&nbsp;<a href="#" style="color:#fff; font-size:.85rem;">Découvrir les 4 pôles →</a></p>
+      </div>
+      <p class="maquette-titre">Héros du site — dégradé signature + trajectoire en filigrane + un bouton principal</p>
+    </div>
+
+    <div class="grille g2">
+      <div class="maquette">
+        <div style="background:#10314F; height:140px; position:relative; overflow:hidden;">
+          <svg style="position:absolute; left:20px; bottom:18px;" width="240" height="60" viewBox="0 0 240 60"><path d="M8 46 C 70 46, 90 14, 150 18 C 200 22, 210 38, 232 16" fill="none" stroke="#35C1D6" stroke-width="2" stroke-dasharray="1 8" stroke-linecap="round"/><circle cx="8" cy="46" r="4" fill="#35C1D6"/></svg>
+          <div style="position:absolute; right:24px; top:34px; text-align:right; color:#fff;">
+            <p style="font-family:var(--gpv-font-titres); font-weight:600; font-size:1rem;">Giovanni's Positive Vibes</p>
+            <p style="font-size:.7rem; color:rgba(255,255,255,.8);">Transformer les dynamiques humaines. Renforcer les organisations.</p>
+          </div>
+        </div>
+        <p class="maquette-titre">Bannière LinkedIn 1584 × 396 — nuit + trajectoire turquoise</p>
+      </div>
+      <div class="maquette">
+        <div style="padding: var(--gpv-e-6); display:flex; gap: var(--gpv-e-4); align-items:center;">
+          <img src="assets/logo-gpv.svg" alt="Logo GPV" style="width:88px; height:auto;">
+          <div style="font-size:.8rem; line-height:1.55; border-left:3px solid var(--gpv-turquoise); padding-left: var(--gpv-e-4);">
+            <strong style="font-family:var(--gpv-font-titres); font-weight:600; color:var(--gpv-nuit);">Yassine Kettani</strong><br>
+            <span style="color:var(--gpv-texte-secondaire);">Fondateur · Giovanni's Positive Vibes</span><br>
+            <span style="color:var(--gpv-texte-secondaire);">+212 7 76 68 63 12 · giovannispositivevibes@gmail.com</span><br>
+            <a href="https://www.giovannispositivevibes.com" style="color:var(--gpv-azur);">giovannispositivevibes.com</a>
+          </div>
+        </div>
+        <p class="maquette-titre">Signature e-mail — logo rond, filet turquoise, coordonnées confirmées</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 10 PRINT ============ -->
+<section id="offline">
+  <div class="conteneur">
+    <div class="sec-num">10</div>
+    <h2>Déclinaisons print</h2>
+    <p class="intro-section">Carte de visite, papeterie, roll-up et workbook : mêmes couleurs (CMJN indiqués section 03), mêmes typographies, mêmes motifs.</p>
+
+    <div style="display:flex; gap: var(--gpv-e-6); flex-wrap:wrap; align-items:flex-start;">
+      <figure>
+        <div style="width:306px; height:198px; background:#10314F; border-radius:10px; position:relative; overflow:hidden; box-shadow:var(--gpv-ombre-carte);">
+          <img src="assets/logo-gpv-blanc.svg" width="128" style="position:absolute; top:26px; left:24px;" alt="Logo sur carte de visite">
+          <div style="position:absolute; bottom:22px; left:24px; color:#fff;">
+            <p style="font-family:var(--gpv-font-titres); font-weight:600; font-size:.95rem;">Yassine Kettani</p>
+            <p style="font-size:.68rem; color:rgba(255,255,255,.8);">Fondateur · Intervenant en leadership, formation et dynamiques humaines</p>
+          </div>
+          <svg style="position:absolute; right:0; top:0;" width="120" height="198" viewBox="0 0 120 198"><path d="M118 10 C 80 60, 112 120, 78 188" fill="none" stroke="#35C1D6" stroke-width="2" stroke-dasharray="1 8" stroke-linecap="round" opacity=".7"/></svg>
+        </div>
+        <figcaption class="legende" style="margin-top:.5rem;">Carte de visite 85 × 55 mm — recto</figcaption>
+      </figure>
+      <figure>
+        <div style="width:306px; height:198px; background:#fff; border:1px solid var(--gpv-filet); border-radius:10px; position:relative; overflow:hidden;">
+          <div style="position:absolute; top:0; left:0; right:0; height:5px; background:var(--gpv-degrade);"></div>
+          <div style="position:absolute; top:38px; left:24px; font-size:.75rem; line-height:1.9; color:var(--gpv-nuit);">
+            +212 7 76 68 63 12<br>giovannispositivevibes@gmail.com<br>giovannispositivevibes.com<br>Casablanca · et à distance
+          </div>
+          <p style="position:absolute; bottom:18px; left:24px; right:24px; font-size:.62rem; color:var(--gpv-texte-secondaire);">Comprendre ce qui bloque. Renforcer ce qui relie. Mettre en mouvement ce qui doit changer.</p>
+        </div>
+        <figcaption class="legende" style="margin-top:.5rem;">Carte de visite — verso</figcaption>
+      </figure>
+      <figure>
+        <div style="width:240px; height:340px; background:#fff; border:1px solid var(--gpv-filet); border-radius:6px; position:relative; overflow:hidden;">
+          <div style="position:absolute; top:0; left:0; right:0; height:4px; background:var(--gpv-degrade);"></div>
+          <img src="assets/logo-gpv.svg" style="position:absolute; top:16px; left:18px; width:70px; height:auto;" alt="Logo en-tête A4">
+          <div style="position:absolute; top:80px; left:18px; right:18px;">
+            <div style="height:8px; background:var(--gpv-perle); border-radius:4px; margin-bottom:8px; width:60%;"></div>
+            <div style="height:5px; background:var(--gpv-perle); border-radius:4px; margin-bottom:5px;"></div>
+            <div style="height:5px; background:var(--gpv-perle); border-radius:4px; margin-bottom:5px; width:90%;"></div>
+            <div style="height:5px; background:var(--gpv-perle); border-radius:4px; width:75%;"></div>
+          </div>
+          <div style="position:absolute; bottom:0; left:0; right:0; height:28px; background:#10314F; display:flex; align-items:center; justify-content:center; color:rgba(255,255,255,.85); font-size:.5rem;">giovannispositivevibes.com · +212 7 76 68 63 12 · Casablanca</div>
+        </div>
+        <figcaption class="legende" style="margin-top:.5rem;">En-tête A4 / proposition</figcaption>
+      </figure>
+      <figure>
+        <div style="width:122px; height:288px; background:var(--gpv-degrade); border-radius:6px; position:relative; overflow:hidden;">
+          <img src="assets/logo-gpv-blanc.svg" width="92" style="position:absolute; top:22px; left:50%; transform:translateX(-50%);" alt="Logo roll-up">
+          <p style="position:absolute; top:110px; left:14px; right:14px; color:#fff; font-family:var(--gpv-font-titres); font-weight:600; font-size:.72rem; line-height:1.35; text-align:center;">Comprendre ce qui bloque. Renforcer ce qui relie.</p>
+          <div style="position:absolute; bottom:14px; left:14px; right:14px; background:rgba(255,255,255,.14); border-radius:6px; padding:6px; color:#fff; font-size:.5rem; text-align:center;">giovannispositivevibes.com</div>
+        </div>
+        <figcaption class="legende" style="margin-top:.5rem;">Roll-up 85 × 200 cm</figcaption>
+      </figure>
+      <figure>
+        <div style="width:200px; height:282px; background:var(--gpv-ciel); border-radius:6px; position:relative; overflow:hidden; border:1px solid var(--gpv-filet);">
+          <p class="legende" style="position:absolute; top:20px; left:18px; color:var(--gpv-azur);">GPV Expériences</p>
+          <p style="position:absolute; top:44px; left:18px; right:18px; color:var(--gpv-nuit); font-family:var(--gpv-font-titres); font-weight:600; font-size:1rem; line-height:1.3;">Re-Connectez-vous — carnet de journée</p>
+          <svg style="position:absolute; bottom:0; left:0;" width="200" height="60" viewBox="0 0 200 60" preserveAspectRatio="none"><path d="M0 34 C 40 12, 70 48, 105 30 C 140 12, 170 40, 200 22 L200 60 L0 60 Z" fill="#1F8FC4" opacity=".3"/><path d="M0 44 C 45 26, 80 56, 120 40 C 155 26, 180 48, 200 36 L200 60 L0 60 Z" fill="#16466E" opacity=".55"/></svg>
+        </div>
+        <figcaption class="legende" style="margin-top:.5rem;">Couverture de workbook A5</figcaption>
+      </figure>
+    </div>
+    <div class="note">Papier : couché mat 350 g (cartes), 120 g (intérieurs). Le dégradé s'imprime en CMJN sans tierce couleur ; prévoir un test d'impression avant série. Sur fonds colorés : version logotype blanc ; en une couleur (tampon, gravure) : version monochrome bleu nuit.</div>
+  </div>
+</section>
+
+<footer>
+  <div class="conteneur">
+    <p><strong style="color:var(--gpv-nuit);">Giovanni's Positive Vibes</strong> · Casablanca, Maroc · accompagnements à distance<br>
+    +212 7 76 68 63 12 · giovannispositivevibes@gmail.com · giovannispositivevibes.com · Instagram @wearegiovanni · YouTube @giovannispositivevibes</p>
+    <p style="margin-top: var(--gpv-e-4);">Garde-fous : aucun chiffre, témoignage, certification ou référence client non vérifié ; pas de vocabulaire médical ou « neuro-quantique » ; le parapente est un support expérientiel encadré, jamais une thérapie. Logo : fichiers officiels uniquement (SVG couleur, logotype blanc, monochrome nuit, PNG transparent, JPEG original) — jamais redessiné, le rendu s'adapte au fond.</p>
+  </div>
+</footer>
+
+</body>
+</html>
