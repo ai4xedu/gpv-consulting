@@ -1,0 +1,245 @@
+/* ============================================================
+   GPV — Ebook « Pourquoi vos disputes recommencent toujours ? »
+   Mise en page A4 · charte « La Trajectoire » · consomme tokens.css
+   ============================================================ */
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+@page { size: A4; margin: 0; }
+
+body {
+  font-family: var(--gpv-font-texte);
+  color: var(--gpv-texte);
+  background: #8a97a4;
+  -webkit-font-smoothing: antialiased;
+}
+
+.page {
+  position: relative;
+  width: 210mm;
+  height: 297mm;
+  margin: 0 auto 8mm;
+  background: var(--gpv-blanc);
+  overflow: hidden;
+  page-break-after: always;
+  break-after: page;
+  display: flex;
+  flex-direction: column;
+}
+.page:last-child { page-break-after: auto; margin-bottom: 0; }
+
+.corps {
+  flex: 1;
+  padding: 17mm 19mm 15mm;
+  display: flex;
+  flex-direction: column;
+}
+.corps--serre { padding: 14mm 19mm 14mm; }
+
+/* ---------- typographie ---------- */
+h1, h2, h3, h4 { font-family: var(--gpv-font-titres); line-height: 1.18; }
+h2 { font-size: 22.5pt; font-weight: 600; color: var(--gpv-nuit); }
+h3 { font-size: 13.5pt; font-weight: 600; color: var(--gpv-indigo); margin: 3mm 0 2mm; }
+h4 { font-size: 11.5pt; font-weight: 600; color: var(--gpv-nuit); margin-bottom: 1.5mm; }
+
+p { font-size: 9.9pt; line-height: 1.5; margin-bottom: 2.5mm; }
+p.intro { font-size: 11pt; line-height: 1.5; color: var(--gpv-indigo); }
+strong { font-weight: 600; color: var(--gpv-nuit); }
+em { font-style: italic; }
+
+.chapo {
+  font-size: 10.6pt; line-height: 1.48; color: var(--gpv-texte-secondaire);
+  margin-bottom: 4mm; max-width: 64ch;
+}
+
+/* ---------- en-tête de page ---------- */
+.ligne-titre { display: flex; align-items: baseline; gap: 4mm; margin-bottom: 2mm; }
+.numero-chapitre {
+  font-family: var(--gpv-font-titres); font-weight: 600; font-size: 9pt;
+  letter-spacing: .14em; color: var(--gpv-azur); text-transform: uppercase;
+}
+.filet-titre { height: 2.5px; width: 26mm; background: var(--gpv-degrade); border-radius: 2px; margin-bottom: 4mm; }
+
+/* ---------- pied de page ---------- */
+.pied {
+  position: absolute; bottom: 9mm; left: 20mm; right: 20mm;
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: 7.5pt; color: #7d8fa0; letter-spacing: .04em;
+  border-top: 1px solid var(--gpv-filet); padding-top: 2.5mm;
+}
+.pied span:last-child { font-family: var(--gpv-font-titres); font-weight: 500; color: var(--gpv-indigo); }
+
+/* ---------- couverture ---------- */
+.couverture { background: var(--gpv-degrade); color: #fff; justify-content: space-between; }
+.couv-haut { padding: 20mm 20mm 0; }
+.couv-milieu { padding: 0 20mm; }
+.couv-bas { padding: 0 20mm 18mm; }
+.couverture .logo { width: 46mm; height: auto; }
+.badge-couv {
+  display: inline-block; border: 1px solid rgba(255,255,255,.55);
+  border-radius: 999px; padding: 1.6mm 5mm;
+  font-size: 8.5pt; letter-spacing: .16em; text-transform: uppercase; font-weight: 500;
+}
+.couverture h1 {
+  font-size: 40pt; font-weight: 600; letter-spacing: -.5pt;
+  margin: 7mm 0 6mm; max-width: 15ch;
+}
+.couv-sous { font-size: 12.5pt; line-height: 1.5; color: rgba(255,255,255,.93); max-width: 46ch; }
+.couv-accroche {
+  font-family: var(--gpv-font-titres); font-weight: 500; font-size: 14pt;
+  margin-bottom: 9mm; color: #fff;
+}
+.couv-auteur { font-size: 10pt; color: rgba(255,255,255,.9); line-height: 1.6; }
+.couv-auteur strong { color: #fff; font-family: var(--gpv-font-titres); font-weight: 600; font-size: 12pt; display: block; }
+.trace-couv { position: absolute; inset: 0; opacity: .32; }
+
+/* ---------- encadrés ---------- */
+.encadre {
+  background: var(--gpv-fond-doux); border-left: 3px solid var(--gpv-azur);
+  border-radius: 0 8px 8px 0; padding: 3.8mm 5mm; margin: 3mm 0;
+}
+.encadre h4 { color: var(--gpv-indigo); }
+.encadre p { font-size: 9.4pt; line-height: 1.46; margin-bottom: 1.6mm; }
+.encadre p:last-child { margin-bottom: 0; }
+
+.encadre--nuit { background: var(--gpv-nuit); border-left-color: var(--gpv-accent); color: #fff; }
+.encadre--nuit h4, .encadre--nuit strong { color: #fff; }
+.encadre--nuit p { color: rgba(255,255,255,.9); }
+
+.encadre--alerte { background: #FCEBEB; border-left-color: #A32D2D; }
+.encadre--alerte h4 { color: #791F1F; }
+
+.encadre--exercice { background: var(--gpv-fond-neutre); border-left-color: var(--gpv-accent); }
+
+/* ---------- citation mise en avant ---------- */
+.citation {
+  font-family: var(--gpv-font-titres); font-weight: 500; font-size: 12.4pt;
+  line-height: 1.36; color: var(--gpv-indigo);
+  border-top: 2px solid var(--gpv-accent); border-bottom: 1px solid var(--gpv-filet);
+  padding: 3.8mm 0; margin: 3.5mm 0; max-width: 56ch;
+}
+.citation--fin { border-bottom: 0; }
+
+/* ---------- listes ---------- */
+ul, ol { margin: 0 0 3.5mm 0; padding-left: 5mm; }
+li { font-size: 9.9pt; line-height: 1.46; margin-bottom: 1.3mm; }
+ul.puces { list-style: none; padding-left: 0; }
+ul.puces li { position: relative; padding-left: 6mm; }
+ul.puces li::before {
+  content: ''; position: absolute; left: 0; top: 2.2mm;
+  width: 5px; height: 5px; border-radius: 50%; background: var(--gpv-accent);
+}
+ol.numerotee { list-style: none; counter-reset: n; padding-left: 0; }
+ol.numerotee li { counter-increment: n; position: relative; padding-left: 8.5mm; margin-bottom: 1.9mm; }
+ol.numerotee li::before {
+  content: counter(n); position: absolute; left: 0; top: 0;
+  width: 6mm; height: 6mm; border-radius: 50%;
+  background: var(--gpv-fond-doux); color: var(--gpv-indigo);
+  font-family: var(--gpv-font-titres); font-weight: 600; font-size: 8.5pt;
+  display: flex; align-items: center; justify-content: center;
+}
+
+/* ---------- grilles ---------- */
+.duo { display: grid; grid-template-columns: 1fr 1fr; gap: 5mm; }
+.trio { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4mm; }
+.carte {
+  background: var(--gpv-fond-neutre); border-radius: 8px; padding: 3.6mm 4.2mm;
+}
+.carte h4 { font-size: 10pt; }
+.carte p { font-size: 9pt; line-height: 1.44; margin-bottom: 0; color: var(--gpv-texte-secondaire); }
+
+/* ---------- test d'auto-évaluation ---------- */
+table.test { width: 100%; border-collapse: collapse; margin-bottom: 4mm; }
+table.test th {
+  font-family: var(--gpv-font-titres); font-weight: 500; font-size: 7.5pt;
+  color: var(--gpv-texte-secondaire); text-transform: uppercase; letter-spacing: .08em;
+  padding: 0 1mm 2mm; text-align: center; width: 13mm;
+}
+table.test th.enonce { text-align: left; width: auto; }
+table.test td { font-size: 9.5pt; padding: 2.1mm 1mm; border-bottom: 1px solid var(--gpv-filet); vertical-align: middle; }
+table.test td.enonce { line-height: 1.4; }
+table.test td.case { text-align: center; }
+.case-vide {
+  display: inline-block; width: 3.6mm; height: 3.6mm;
+  border: 1.2px solid #b9cbd8; border-radius: 2px;
+}
+
+/* ---------- barème ---------- */
+.bareme { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3mm; }
+.bareme div { border-radius: 8px; padding: 3.5mm 4mm; }
+.bareme strong { display: block; font-family: var(--gpv-font-titres); font-size: 11pt; margin-bottom: 1mm; }
+.bareme p { font-size: 8.5pt; line-height: 1.4; margin: 0; }
+.b1 { background: var(--gpv-fond-doux); }
+.b2 { background: #DFF0F6; }
+.b3 { background: #C9E4EF; }
+.b4 { background: var(--gpv-nuit); color: #fff; }
+.b4 strong { color: #fff; }
+.b4 p { color: rgba(255,255,255,.88); }
+
+/* ---------- schéma du cycle ---------- */
+.cycle { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3mm; margin: 3mm 0; }
+.cycle-etape {
+  background: var(--gpv-blanc); border: 1px solid var(--gpv-filet);
+  border-radius: 8px; padding: 3.5mm 4mm; position: relative;
+}
+.cycle-etape span {
+  font-family: var(--gpv-font-titres); font-weight: 600; font-size: 8pt;
+  color: var(--gpv-accent); display: block; margin-bottom: 1mm;
+}
+.cycle-etape strong { font-family: var(--gpv-font-titres); font-weight: 500; font-size: 10pt; display: block; margin-bottom: .8mm; }
+.cycle-etape p { font-size: 8.2pt; margin: 0; color: var(--gpv-texte-secondaire); line-height: 1.38; }
+
+/* ---------- dialogue ---------- */
+.dialogue { margin: 3mm 0; }
+.replique { display: flex; gap: 3mm; margin-bottom: 1.5mm; font-size: 9.4pt; line-height: 1.44; }
+.replique .qui {
+  flex: none; width: 17mm; font-family: var(--gpv-font-titres); font-weight: 500;
+  font-size: 9pt; color: var(--gpv-azur);
+}
+
+/* ---------- exercice à remplir ---------- */
+.champ-exo { margin-bottom: 3mm; }
+.champ-exo p { font-size: 10pt; margin-bottom: 1.6mm; font-weight: 500; color: var(--gpv-nuit); }
+.lignes { border-bottom: 1px solid #cfdde7; height: 4.3mm; }
+.lignes + .lignes { margin-top: 0; }
+
+/* ---------- vague séparatrice ---------- */
+.vague { width: 100%; height: 12mm; display: block; }
+
+/* ---------- page finale ---------- */
+.final { background: var(--gpv-degrade); color: #fff; }
+.final h2, .final h3, .final h4 { color: #fff; }
+.final p { color: rgba(255,255,255,.92); }
+.final .filet-titre { background: #fff; }
+.final .numero-chapitre { color: rgba(255,255,255,.85); }
+
+.bloc-cta {
+  background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.3);
+  border-radius: 10px; padding: 6mm; margin-top: 4mm;
+}
+.bloc-cta a { color: #fff; text-decoration: none; font-weight: 500; }
+.contacts { list-style: none; padding: 0; margin: 3mm 0 0; }
+.contacts li { font-size: 10pt; margin-bottom: 2mm; display: flex; gap: 3mm; }
+.contacts li b { font-family: var(--gpv-font-titres); font-weight: 500; min-width: 26mm; color: rgba(255,255,255,.8); }
+
+.bio {
+  background: rgba(255,255,255,.94); color: var(--gpv-texte);
+  border-radius: 10px; padding: 6mm; display: grid; grid-template-columns: 30mm 1fr; gap: 5mm; align-items: start;
+}
+.bio img.portrait {
+  width: 30mm; height: 37.5mm; object-fit: cover; object-position: center top;
+  border-radius: 8px; box-shadow: 0 2px 10px rgba(16,49,79,.18);
+}
+.bio h4 { color: var(--gpv-nuit); font-size: 12pt; margin-bottom: 1mm; }
+.bio .role { font-size: 8.5pt; color: var(--gpv-azur); font-weight: 500; margin-bottom: 2.5mm; letter-spacing: .04em; }
+.bio p { font-size: 9pt; color: var(--gpv-texte-secondaire); line-height: 1.55; margin-bottom: 2mm; }
+
+.mention-legale {
+  font-size: 7.5pt; line-height: 1.5; color: rgba(255,255,255,.72);
+  border-top: 1px solid rgba(255,255,255,.24); padding-top: 3mm; margin-top: 4mm;
+}
+
+@media print {
+  body { background: none; }
+  .page { margin: 0; box-shadow: none; }
+}
