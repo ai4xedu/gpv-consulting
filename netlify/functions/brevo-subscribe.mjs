@@ -1,17 +1,23 @@
 /**
  * Inscription au guide « Pourquoi vos disputes recommencent toujours ? »
- * Enregistre le contact dans Brevo. La clé API reste côté serveur.
+ * Enregistre le contact dans Brevo et lui envoie immédiatement l'e-mail de
+ * livraison du guide. La clé API reste côté serveur.
  *
  * Variables d'environnement Netlify :
- *   BREVO_KEY         (obligatoire en production) — clé v3, Brevo > SMTP & API > Clés API
- *   BREVO_LIST_ID     (optionnel) — identifiant numérique de la liste de destination, 2 par défaut
- *   BREVO_ATTR_PRENOM (optionnel) — nom de l'attribut prénom, « PRENOM » par défaut
+ *   BREVO_KEY               (obligatoire en production) — clé v3, Brevo > SMTP & API > Clés API
+ *   BREVO_LIST_ID           (optionnel) — identifiant numérique de la liste de destination, 2 par défaut
+ *   BREVO_ATTR_PRENOM       (optionnel) — nom de l'attribut prénom, « PRENOM » par défaut
+ *   BREVO_EXPEDITEUR_NOM    (optionnel) — « Giovanni's Positive Vibes » par défaut
+ *   BREVO_EXPEDITEUR_EMAIL  (optionnel) — doit être un expéditeur validé dans Brevo, « yk@gpvconsulting.com » par défaut
  *
  * Sans BREVO_KEY, la fonction répond en mode test : le parcours
- * complet est jouable, mais aucun contact n'est enregistré.
+ * complet est jouable, mais aucun contact n'est enregistré et aucun e-mail n'est envoyé.
  */
 
+import { genererCourrielGuide } from './lib/modele-guide.mjs';
+
 const EMAIL_VALIDE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+const SUJET_COURRIEL = 'Votre guide est prêt à télécharger';
 
 const reponse = (donnees, statut = 200) =>
   new Response(JSON.stringify(donnees), {
@@ -61,6 +67,31 @@ export default async (req) => {
 
   const attributPrenom = process.env.BREVO_ATTR_PRENOM || 'PRENOM';
   const listeId = Number.parseInt(process.env.BREVO_LIST_ID ?? '2', 10);
+  const expediteur = {
+    name: process.env.BREVO_EXPEDITEUR_NOM || "Giovanni's Positive Vibes",
+    email: process.env.BREVO_EXPEDITEUR_EMAIL || 'yk@gpvconsulting.com',
+  };
+
+  const envoyerCourrielGuide = async () => {
+    try {
+      const r = await fetch('https://api.brevo.com/v3/smtp/email', {
+        method: 'POST',
+        headers: { 'api-key': cle, 'content-type': 'application/json', accept: 'application/json' },
+        body: JSON.stringify({
+          sender: expediteur,
+          to: [{ email, name: prenom }],
+          replyTo: expediteur,
+          subject: SUJET_COURRIEL,
+          htmlContent: genererCourrielGuide(prenom),
+        }),
+      });
+      if (!r.ok) {
+        console.error('[brevo] échec envoi e-mail guide %s : %s', r.status, await r.text());
+      }
+    } catch (e) {
+      console.error('[brevo] exception envoi e-mail guide :', e);
+    }
+  };
 
   const envoyer = (avecAttributs) => {
     const charge = { email, updateEnabled: true };
@@ -92,12 +123,14 @@ export default async (req) => {
 
     // 201 = contact créé · 204 = contact existant mis à jour
     if (r.ok || r.status === 204) {
+      await envoyerCourrielGuide();
       return reponse({ ok: true, enregistre: true });
     }
 
     // Un contact déjà présent n'est pas une erreur pour l'utilisateur.
     const detail = await r.json().catch(() => ({}));
     if (detail?.code === 'duplicate_parameter') {
+      await envoyerCourrielGuide();
       return reponse({ ok: true, enregistre: true, deja: true });
     }
 
