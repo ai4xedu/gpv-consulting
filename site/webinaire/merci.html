@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Inscription confirmée — Hors Emprise · Giovanni's Positive Vibes</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="../img/logo-gpv.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/tokens.css">
+<link rel="stylesheet" href="webinaire.css">
+</head>
+<body>
+
+<!-- ═══════════ BARRE ═══════════ -->
+<header class="barre">
+  <div class="conteneur barre-int">
+    <a href="../" aria-label="Giovanni's Positive Vibes — accueil"><img src="../img/logo-gpv.svg" alt="Giovanni's Positive Vibes"></a>
+    <a class="retour" href="../">← Retour au site</a>
+  </div>
+</header>
+
+<!-- ═══════════ CONFIRMATION ═══════════ -->
+<section class="hero confirmation">
+  <div class="conteneur confirmation-int">
+    <div class="coche" aria-hidden="true">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
+    </div>
+
+    <h1>C'est noté. Ta place est réservée.</h1>
+
+    <p>Tu reçois le lien de connexion par e-mail, et un rappel sur WhatsApp le jour même.</p>
+
+    <div class="quand">
+      <b>Dimanche 13 septembre, 19h00</b>
+      Heure de Casablanca · 60 minutes
+    </div>
+
+    <p>Deux choses qui font une vraie différence&nbsp;:</p>
+    <ol>
+      <li>Mets un rappel dans ton téléphone maintenant, pendant que tu y penses.</li>
+      <li>Viens en direct plutôt qu'en replay. Je réponds aux questions du chat pendant la séance — c'est là que ça se joue.</li>
+    </ol>
+
+    <p>Si tu ne peux vraiment pas être là, le replay te sera envoyé et restera accessible 48 heures.</p>
+
+    <a class="btn btn--inverse" href="https://www.instagram.com/wearegiovanni">Voir les publications d'ici là</a>
+
+    <p class="note" id="note-test" hidden>
+      Mode test&nbsp;: le formulaire fonctionne, mais la connexion Brevo n'est pas encore configurée.
+      Aucun contact n'a été enregistré et aucun e-mail n'a été envoyé.
+    </p>
+
+    <p class="note">
+      Le lien n'arrive pas&nbsp;? Vérifie tes spams, puis écris à
+      <a href="mailto:giovannispositivevibes@gmail.com">giovannispositivevibes@gmail.com</a>.
+    </p>
+  </div>
+</section>
+
+<!-- ═══════════ PIED ═══════════ -->
+<footer class="pied">
+  <div class="conteneur">
+    <div class="pied-int">
+      <img src="../img/logo-gpv-blanc.svg" alt="Giovanni's Positive Vibes">
+      <div>
+        +212 7 76 68 63 12 · <a href="mailto:giovannispositivevibes@gmail.com">giovannispositivevibes@gmail.com</a><br>
+        Casablanca — et à distance · <a href="https://instagram.com/wearegiovanni">@wearegiovanni</a>
+      </div>
+    </div>
+    <p class="legal">
+      Giovanni's Positive Vibes S.A.R.L. A.U. — 77 rue Mohamed Smiha, 10e étage, appt 57, Casablanca.
+      ICE 003821681000012 · IF 68779022 · RC 700569 · Patente 32109008. © 2026 Giovanni's Positive Vibes.
+    </p>
+  </div>
+</footer>
+
+<script>
+  // ?mode=test : renvoyé par le formulaire quand la clé Brevo n'est pas configurée.
+  if (new URLSearchParams(location.search).get('mode') === 'test') {
+    document.getElementById('note-test').hidden = false;
+  }
+</script>
+
+</body>
+</html>
