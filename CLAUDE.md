@@ -67,7 +67,7 @@ CMJN : turquoise C75 M10 J0 N16 · azur C84 M27 J0 N23 · indigo C80 M36 J0 N57 
 - Jamais : chiffres/témoignages/certifications inventés, « coach certifié ICF », « aérothérapie », promesses de guérison, vocabulaire « neuro-quantique », lotus/cerveaux lumineux/ésotérisme, stock photos artificielles, visages générés par IA.
 - Le parapente = support expérientiel encadré, jamais une thérapie. B2B et B2C toujours séparés.
 - Ton : professionnel, humain, précis. Phrases courtes. « Vous » en institutionnel ; tutoiement possible en grand public. Pas de superlatifs.
-- Coordonnées confirmées uniquement : +212 7 76 68 63 12 · giovannispositivevibes@gmail.com · giovannispositivevibes.com · Instagram @wearegiovanni · YouTube @giovannispositivevibes · Casablanca.
+- Coordonnées confirmées uniquement : +212 7 76 68 63 12 · yk@gpvconsulting.com · gpvconsulting.com · Instagram @wearegiovanni · YouTube @giovannispositivevibes · Casablanca.
 
 ## Projet
 
