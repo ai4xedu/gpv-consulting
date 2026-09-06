@@ -153,6 +153,17 @@ h4 { font-size: var(--gpv-taille-h4); }
   content: ''; position: absolute; left: 0; top: .55em;
   width: 5px; height: 5px; border-radius: 50%; background: var(--gpv-accent);
 }
+/* liens d'une carte vers une page dédiée (webinaire, programme) — la couleur
+   d'action tranche sur le texte secondaire de la carte, sinon rien ne dit
+   qu'on peut cliquer. */
+.carte-liens { list-style: none; margin-top: var(--gpv-e-4); display: grid; gap: .4rem; }
+.carte-liens a {
+  font-size: .85rem; font-weight: 500; color: var(--gpv-action);
+  text-decoration: none; display: inline-flex; align-items: baseline; gap: .35rem;
+}
+.carte-liens a::after { content: '→'; }
+.carte-liens a:hover { color: var(--gpv-action-survol); text-decoration: underline; }
+
 .etiquette {
   display: inline-block; font-size: .7rem; font-weight: 500; letter-spacing: .06em;
   text-transform: uppercase; background: var(--gpv-fond-doux); color: var(--gpv-indigo);
@@ -272,7 +283,7 @@ form { background: var(--gpv-blanc); border: 1px solid var(--gpv-filet); border-
 
 /* ============ pied de page ============ */
 .pied { background: var(--gpv-fond-sombre); color: rgba(255,255,255,.78); padding: var(--gpv-e-12) 0 var(--gpv-e-6); font-size: .875rem; }
-.pied-haut { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: var(--gpv-e-8); padding-bottom: var(--gpv-e-8); border-bottom: 1px solid rgba(255,255,255,.14); }
+.pied-haut { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: var(--gpv-e-8); padding-bottom: var(--gpv-e-8); border-bottom: 1px solid rgba(255,255,255,.14); }
 .pied img { height: 54px; width: auto; margin-bottom: var(--gpv-e-4); }
 .pied h4 { color: var(--gpv-blanc); font-size: .875rem; margin-bottom: var(--gpv-e-3); }
 .pied ul { list-style: none; }
