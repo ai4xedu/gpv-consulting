@@ -1,0 +1,320 @@
+/* ============================================================
+   GPV — Page du programme « Hors Emprise »
+   Charte « La Trajectoire » · consomme ../css/tokens.css
+   Mêmes conventions que /webinaire/webinaire.css et /guide/guide.css
+   (conteneur, kicker, champs, pied) : les trois pages sont jumelles.
+   Ce qui n'existe que pour cette page est regroupé sous « spécifique ».
+   ============================================================ */
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--gpv-font-texte);
+  font-size: var(--gpv-taille-texte);
+  line-height: 1.65;
+  color: var(--gpv-texte);
+  background: var(--gpv-blanc);
+  -webkit-font-smoothing: antialiased;
+}
+img, svg { display: block; max-width: 100%; height: auto; }
+h1, h2, h3, h4 { font-family: var(--gpv-font-titres); font-weight: 600; line-height: 1.2; }
+h3, h4 { font-weight: 500; }
+strong { font-weight: 600; color: var(--gpv-texte); }
+
+.conteneur { width: 100%; max-width: 1120px; margin: 0 auto; padding: 0 var(--gpv-e-6); }
+/* Colonne de lecture : le contenu de cette page est long, il reste étroit. */
+.mesure { max-width: 46rem; }
+.section { padding: clamp(3rem, 6.5vw, 5rem) 0; }
+.section--doux { background: var(--gpv-fond-doux); }
+.section--neutre { background: var(--gpv-fond-neutre); }
+
+.kicker {
+  font-size: var(--gpv-taille-legende); font-weight: 500;
+  letter-spacing: var(--gpv-espacement-legende); text-transform: uppercase;
+  color: var(--gpv-azur); display: flex; align-items: center; gap: var(--gpv-e-2);
+}
+.kicker::before { content: ''; width: 24px; height: 2px; background: var(--gpv-accent); border-radius: 2px; }
+.section h2 { font-size: var(--gpv-taille-h2); margin: var(--gpv-e-3) 0 var(--gpv-e-6); max-width: 24ch; }
+.chapo { color: var(--gpv-texte-secondaire); margin-top: calc(var(--gpv-e-6) * -1 + var(--gpv-e-2)); margin-bottom: var(--gpv-e-6); }
+
+/* ---------- barre ---------- */
+.barre {
+  border-bottom: 1px solid var(--gpv-filet); background: rgba(255,255,255,.94);
+  backdrop-filter: blur(8px); position: sticky; top: 0; z-index: 60;
+}
+.barre-int { display: flex; align-items: center; justify-content: space-between; gap: var(--gpv-e-4); padding: var(--gpv-e-3) 0; }
+.barre img { height: 40px; width: auto; }
+.barre .retour { font-size: .875rem; color: var(--gpv-texte-secondaire); text-decoration: none; }
+.barre .retour:hover { color: var(--gpv-indigo); }
+
+/* ---------- boutons ---------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: .6rem;
+  font-family: var(--gpv-font-titres); font-weight: 500; font-size: 1rem;
+  padding: .95rem 2rem; border: 0; border-radius: var(--gpv-rayon-pilule);
+  background: var(--gpv-action); color: var(--gpv-blanc); text-decoration: none;
+  cursor: pointer; transition: background .18s, transform .18s;
+}
+.btn:hover:not(:disabled) { background: var(--gpv-action-survol); transform: translateY(-1px); }
+.btn:disabled { opacity: .62; cursor: not-allowed; transform: none; }
+/* Sur fond nuit ou dégradé, le CTA s'inverse : l'indigo y disparaîtrait. */
+.btn--inverse { background: var(--gpv-blanc); color: var(--gpv-indigo); }
+.btn--inverse:hover:not(:disabled) { background: var(--gpv-fond-doux); color: var(--gpv-indigo); }
+
+/* ---------- hero ---------- */
+.hero { background: var(--gpv-fond-sombre); color: var(--gpv-blanc); position: relative; }
+.hero::before { content: ''; display: block; height: 4px; background: var(--gpv-degrade); }
+/* padding-block, et non le raccourci `padding` : cet élément porte aussi
+   .conteneur, dont les marges latérales seraient écrasées. */
+.hero-int { padding-block: clamp(2.5rem, 6vw, 4.5rem) clamp(3rem, 6vw, 4.5rem); }
+.hero h1 {
+  font-size: clamp(1.95rem, 4.4vw, 2.75rem); color: var(--gpv-blanc);
+  max-width: 20ch; margin-bottom: var(--gpv-e-2);
+}
+.hero h1 .suite { display: block; color: var(--gpv-accent); font-weight: 500; }
+.hero .accroche { font-size: 1.075rem; color: rgba(255,255,255,.82); max-width: 44ch; }
+.quand {
+  margin-top: var(--gpv-e-8); padding-top: var(--gpv-e-6);
+  border-top: 1px solid rgba(53,193,214,.35);
+  font-size: .95rem; color: rgba(255,255,255,.8);
+}
+.quand b { display: block; font-family: var(--gpv-font-titres); font-weight: 500; font-size: 1.125rem; color: var(--gpv-blanc); margin-bottom: .15rem; }
+.hero .btn { margin-top: var(--gpv-e-6); }
+.hero .mention { margin-top: var(--gpv-e-3); font-size: .8rem; color: rgba(255,255,255,.62); }
+
+/* ---------- cadre ---------- */
+.cadre-liste { list-style: none; display: grid; gap: var(--gpv-e-4); }
+.cadre-liste li { position: relative; padding-left: 2rem; font-size: .98rem; }
+.cadre-liste li::before {
+  content: ''; position: absolute; left: 0; top: .62em;
+  width: 1.05rem; height: 2px; border-radius: 2px; background: var(--gpv-accent);
+}
+
+/* ---------- citation ---------- */
+.citation {
+  border-left: 3px solid transparent;
+  border-image: var(--gpv-degrade) 1;
+  padding-left: var(--gpv-e-6); max-width: 34rem;
+  font-family: var(--gpv-font-titres); font-weight: 500; line-height: 1.4;
+  font-size: clamp(1.25rem, 3.2vw, 1.6rem); color: var(--gpv-indigo);
+}
+
+/* ---------- auteur ---------- */
+.auteur { display: grid; grid-template-columns: 220px 1fr; gap: var(--gpv-e-8); align-items: start; }
+.auteur img { width: 100%; border-radius: var(--gpv-rayon); }
+.auteur .role { font-size: .875rem; font-weight: 500; color: var(--gpv-azur); margin: var(--gpv-e-2) 0 var(--gpv-e-4); }
+.auteur p + p { margin-top: var(--gpv-e-3); }
+.auteur .txt p { color: var(--gpv-texte-secondaire); }
+
+/* ═══════════ SPÉCIFIQUE À CETTE PAGE ═══════════ */
+
+/* ---------- les quatre chiffres ---------- */
+.chiffres { list-style: none; display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--gpv-e-4); }
+.chiffres li {
+  background: var(--gpv-blanc); border: 1px solid var(--gpv-filet);
+  border-radius: var(--gpv-rayon); padding: var(--gpv-e-6) var(--gpv-e-4);
+  box-shadow: var(--gpv-ombre-carte);
+}
+.chiffres b {
+  display: block; font-family: var(--gpv-font-titres); font-weight: 600;
+  font-size: clamp(1.5rem, 3.6vw, 2rem); line-height: 1.1; color: var(--gpv-indigo);
+}
+.chiffres span { display: block; margin-top: var(--gpv-e-2); font-size: .82rem; color: var(--gpv-texte-secondaire); }
+
+/* ---------- deux colonnes « pour toi / pas maintenant » ---------- */
+.tri { display: grid; grid-template-columns: 1fr 1fr; gap: var(--gpv-e-6); }
+.tri > div {
+  border-radius: var(--gpv-rayon); padding: var(--gpv-e-6);
+  border: 1px solid var(--gpv-filet); background: var(--gpv-blanc);
+}
+.tri h3 { font-size: 1.05rem; font-weight: 600; margin-bottom: var(--gpv-e-4); }
+.tri ul { list-style: none; display: grid; gap: var(--gpv-e-3); }
+.tri li { position: relative; padding-left: 1.7rem; font-size: .94rem; color: var(--gpv-texte-secondaire); }
+.tri li::before {
+  content: ''; position: absolute; left: 0; top: .55em;
+  width: .9rem; height: .9rem; border-radius: 50%;
+}
+/* Le turquoise ne porte jamais de texte, mais il porte une pastille. */
+.tri--oui li::before { background: rgba(53,193,214,.28); border: 2px solid var(--gpv-accent); }
+.tri--non li::before { background: var(--gpv-fond-neutre); border: 2px solid #B4C4D0; }
+
+/* ---------- le parcours en douze semaines ---------- */
+.phase {
+  font-family: var(--gpv-font-titres); font-weight: 600; font-size: .8rem;
+  letter-spacing: var(--gpv-espacement-legende); text-transform: uppercase;
+  color: var(--gpv-azur); margin: var(--gpv-e-8) 0 var(--gpv-e-3);
+}
+.phase:first-of-type { margin-top: var(--gpv-e-6); }
+.semaines { list-style: none; display: grid; }
+.semaines li {
+  display: grid; grid-template-columns: 2.5rem 1fr; gap: .3rem var(--gpv-e-4);
+  padding: var(--gpv-e-4) 0; border-bottom: 1px solid var(--gpv-filet);
+}
+.semaines li:first-child { border-top: 1px solid var(--gpv-filet); }
+.semaines .num {
+  grid-row: 1 / span 2; align-self: start;
+  font-family: var(--gpv-font-titres); font-weight: 600; font-size: .95rem;
+  color: var(--gpv-indigo); background: var(--gpv-fond-doux);
+  width: 2.5rem; height: 2.5rem; border-radius: 50%; display: grid; place-items: center;
+}
+.semaines .titre { font-family: var(--gpv-font-titres); font-weight: 500; font-size: 1rem; align-self: center; }
+.semaines .livrable { font-size: .875rem; color: var(--gpv-texte-secondaire); }
+
+/* ---------- la méthode F.A.I.T.S. ---------- */
+.faits { list-style: none; display: grid; gap: var(--gpv-e-4); margin-top: var(--gpv-e-6); }
+.faits li { display: grid; grid-template-columns: 2.25rem 1fr; gap: var(--gpv-e-4); align-items: baseline; }
+.faits .lettre {
+  font-family: var(--gpv-font-titres); font-weight: 600; font-size: 1.5rem;
+  color: var(--gpv-accent); line-height: 1; text-align: center;
+}
+.faits b { display: block; font-family: var(--gpv-font-titres); font-weight: 500; font-size: 1rem; color: var(--gpv-texte); }
+.faits p { font-size: .93rem; color: var(--gpv-texte-secondaire); margin-top: .15rem; }
+
+/* ---------- le prix ---------- */
+.prix {
+  background: var(--gpv-blanc); border: 1px solid var(--gpv-filet);
+  border-radius: var(--gpv-rayon-grand); padding: var(--gpv-e-8);
+  box-shadow: var(--gpv-ombre-carte); max-width: 34rem;
+}
+.prix .montant {
+  font-family: var(--gpv-font-titres); font-weight: 600;
+  font-size: clamp(2rem, 5vw, 2.75rem); line-height: 1.1; color: var(--gpv-indigo);
+}
+.prix .montant span { font-size: 1rem; font-weight: 500; color: var(--gpv-texte-secondaire); display: block; margin-top: var(--gpv-e-2); }
+.prix dl { margin-top: var(--gpv-e-6); border-top: 1px solid var(--gpv-filet); }
+.prix div { display: flex; flex-wrap: wrap; gap: var(--gpv-e-2) var(--gpv-e-4); justify-content: space-between; padding: var(--gpv-e-3) 0; border-bottom: 1px solid var(--gpv-filet); }
+.prix dt { font-size: .92rem; color: var(--gpv-texte-secondaire); }
+.prix dd { font-size: .92rem; font-weight: 500; text-align: right; }
+.prix .apres-prix { margin-top: var(--gpv-e-6); font-size: .875rem; color: var(--gpv-texte-secondaire); }
+
+/* ---------- les quatre étapes d'entrée ---------- */
+.etapes { list-style: none; counter-reset: pas; }
+.etapes li {
+  counter-increment: pas;
+  display: grid; grid-template-columns: 2.25rem 1fr; gap: .35rem var(--gpv-e-4);
+  padding: var(--gpv-e-6) 0; border-bottom: 1px solid var(--gpv-filet);
+}
+.etapes li::before {
+  content: counter(pas);
+  grid-row: 1 / span 2; align-self: start;
+  width: 2.25rem; height: 2.25rem; border-radius: 50%;
+  display: grid; place-items: center;
+  background: var(--gpv-fond-doux); color: var(--gpv-indigo);
+  font-family: var(--gpv-font-titres); font-weight: 600; font-size: .95rem;
+}
+.etapes h3 { font-size: 1.075rem; font-weight: 600; }
+.etapes p { margin-top: .4rem; font-size: .95rem; color: var(--gpv-texte-secondaire); }
+.etapes a { color: var(--gpv-action); }
+
+/* ---------- candidature ---------- */
+.candidature { background: var(--gpv-degrade); color: var(--gpv-blanc); scroll-margin-top: 4.5rem; }
+.candidature-int { display: grid; grid-template-columns: 1fr 460px; gap: clamp(2rem, 5vw, 4rem); align-items: center; }
+.candidature h2 { font-size: var(--gpv-taille-h2); margin-bottom: var(--gpv-e-3); max-width: 18ch; }
+.candidature .intro { color: rgba(255,255,255,.92); max-width: 42ch; }
+.candidature .rappels { list-style: none; margin-top: var(--gpv-e-6); display: grid; gap: .5rem; }
+.candidature .rappels li { position: relative; padding-left: 1.9rem; font-size: .92rem; color: rgba(255,255,255,.88); }
+.candidature .rappels li::before {
+  content: ''; position: absolute; left: 0; top: .5em;
+  width: 1.05rem; height: 1.05rem; border-radius: 50%; background: rgba(255,255,255,.18);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2.5 6.2l2.2 2.2L9.5 3.6' fill='none' stroke='%23FFFFFF' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-size: 70%; background-position: center; background-repeat: no-repeat;
+}
+
+/* ---------- formulaire ---------- */
+.bloc-form {
+  background: var(--gpv-blanc); color: var(--gpv-texte);
+  border-radius: var(--gpv-rayon-grand); padding: var(--gpv-e-6);
+  box-shadow: var(--gpv-ombre-douce);
+}
+.bloc-form h3 { font-size: 1.15rem; margin-bottom: var(--gpv-e-4); }
+
+.champ { margin-bottom: var(--gpv-e-4); }
+.champ label { display: block; font-size: .825rem; font-weight: 500; margin-bottom: .35rem; }
+.champ input, .champ select, .champ textarea {
+  width: 100%; font-family: inherit; font-size: .95rem; color: var(--gpv-texte);
+  padding: .7rem .9rem; border: 1px solid var(--gpv-filet); border-radius: 10px;
+  background: var(--gpv-blanc); transition: border-color .18s, box-shadow .18s;
+}
+.champ textarea { min-height: 6.5rem; resize: vertical; line-height: 1.6; }
+.champ select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1.5 1.75L6 6.25l4.5-4.5' fill='none' stroke='%2344607C' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right .9rem center; background-size: .7rem;
+  padding-right: 2.4rem;
+}
+.champ input:focus, .champ select:focus, .champ textarea:focus { outline: none; border-color: var(--gpv-azur); box-shadow: 0 0 0 3px rgba(31,143,196,.15); }
+.champ [aria-invalid="true"] { border-color: #A32D2D; box-shadow: 0 0 0 3px rgba(163,45,45,.12); }
+.aide { font-size: .78rem; color: var(--gpv-texte-secondaire); margin-top: .3rem; }
+.compteur { font-size: .72rem; color: var(--gpv-texte-secondaire); margin-top: .3rem; text-align: right; }
+.erreur-champ { display: none; font-size: .78rem; color: #A32D2D; margin-top: .3rem; }
+.erreur-champ.visible { display: block; }
+
+.consentement { display: flex; gap: .7rem; align-items: flex-start; margin-bottom: var(--gpv-e-4); }
+.consentement input { margin-top: .25rem; width: 1.05rem; height: 1.05rem; accent-color: var(--gpv-indigo); flex: none; }
+.consentement label { font-size: .8rem; color: var(--gpv-texte-secondaire); line-height: 1.5; }
+
+.leurre { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+.bloc-form .btn { width: 100%; }
+.bloc-form .btn .rouet {
+  width: 1rem; height: 1rem; border: 2px solid rgba(255,255,255,.4);
+  border-top-color: #fff; border-radius: 50%; animation: tourne .7s linear infinite; display: none;
+}
+form.envoi-en-cours .rouet { display: block; }
+@keyframes tourne { to { transform: rotate(360deg); } }
+
+.mention-form { font-size: .75rem; color: var(--gpv-texte-secondaire); margin-top: var(--gpv-e-3); text-align: center; }
+.erreur-globale {
+  display: none; background: #FCEBEB; border-left: 3px solid #A32D2D; border-radius: 0 8px 8px 0;
+  padding: .7rem .9rem; font-size: .85rem; color: #791F1F; margin-bottom: var(--gpv-e-4);
+}
+.erreur-globale.visible { display: block; }
+
+/* ---------- sécurité ---------- */
+.securite { background: var(--gpv-fond-neutre); padding: var(--gpv-e-8) 0; }
+.securite .conteneur { display: flex; gap: var(--gpv-e-4); align-items: flex-start; max-width: 56rem; }
+.securite svg { flex: none; color: var(--gpv-azur); margin-top: .15rem; }
+.securite p { font-size: .9rem; color: var(--gpv-texte-secondaire); }
+
+/* ---------- pied ---------- */
+.pied { background: var(--gpv-fond-sombre); color: rgba(255,255,255,.75); padding: var(--gpv-e-8) 0; font-size: .85rem; }
+.pied a { color: rgba(255,255,255,.85); }
+.pied-int { display: flex; flex-wrap: wrap; gap: var(--gpv-e-4); justify-content: space-between; align-items: center; }
+.pied img { height: 44px; width: auto; }
+.pied .legal { font-size: .75rem; color: rgba(255,255,255,.55); max-width: 62ch; margin-top: var(--gpv-e-6); line-height: 1.7; }
+
+/* ---------- page de confirmation ---------- */
+.confirmation { background: var(--gpv-fond-sombre); color: rgba(255,255,255,.84); }
+.confirmation-int { padding-block: clamp(3rem, 8vw, 5.5rem); max-width: 38rem; }
+.confirmation h1 { font-size: clamp(1.75rem, 4.4vw, 2.4rem); color: var(--gpv-blanc); margin: var(--gpv-e-3) 0 var(--gpv-e-4); }
+.confirmation .coche {
+  width: 3rem; height: 3rem; border-radius: 50%; display: grid; place-items: center;
+  background: rgba(53,193,214,.16); color: var(--gpv-accent);
+}
+.confirmation .quand { border-bottom: 1px solid rgba(53,193,214,.35); padding-bottom: var(--gpv-e-6); }
+.confirmation ol { margin: var(--gpv-e-4) 0 0; padding-left: 1.2em; }
+.confirmation li { margin-bottom: var(--gpv-e-3); }
+.confirmation p + p { margin-top: var(--gpv-e-4); }
+.confirmation .btn { margin-top: var(--gpv-e-8); }
+.confirmation .note { margin-top: var(--gpv-e-8); font-size: .82rem; color: rgba(255,255,255,.6); }
+.confirmation .note a { color: var(--gpv-accent); }
+
+/* ---------- responsive ---------- */
+@media (max-width: 900px) {
+  .candidature-int { grid-template-columns: 1fr; }
+  .auteur { grid-template-columns: 1fr; gap: var(--gpv-e-6); }
+  .auteur img { max-width: 200px; }
+  .chiffres { grid-template-columns: repeat(2, 1fr); }
+  .tri { grid-template-columns: 1fr; }
+}
+@media (max-width: 560px) {
+  .hero .btn, .confirmation .btn { width: 100%; }
+  .prix { padding: var(--gpv-e-6); }
+  .semaines li { grid-template-columns: 2.1rem 1fr; }
+  .semaines .num { width: 2.1rem; height: 2.1rem; font-size: .85rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .btn:hover { transform: none; }
+  .rouet { animation: none; }
+}
